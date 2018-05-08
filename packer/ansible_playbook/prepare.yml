@@ -1,0 +1,42 @@
+---
+- name: Install Server
+  hosts: all
+  gather_facts: false
+  remote_user: root
+
+  pre_tasks:
+  - name: Install python2 for Ansible
+    raw: bash -c "test -e /usr/bin/python || (apt -qqy update && apt install -qqy python-minimal)"
+    register: output
+    changed_when: output.stdout != ""
+  - name: Gathering Facts
+    setup:
+
+  tasks:
+  - name: update apt
+    apt:
+      update_cache: yes
+  - name: Update all packages to the latest version
+    apt:
+      upgrade: dist
+  - name: Install the package "apt-transport-https"
+    apt:
+      name: apt-transport-https
+  - name: Install the package "ca-certificates"
+    apt:
+      name: ca-certificates
+  - name: Install the package "curl"
+    apt:
+      name: curl
+  - name: Install the package "software-properties-common"
+    apt:
+      name: software-properties-common
+ 
+  # Install NGINX
+  - name: Install NGINX
+    apt:
+      name: nginx
+  - name: 
+    copy:
+      src: index{{ version }}.html
+      dest: /var/www/html/index.html
