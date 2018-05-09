@@ -1,13 +1,16 @@
 provider "digitalocean" {}
 
-variable "image" {
-  #default = "34158157" // version 1
-  default = "34157947" // version 2
+variable "version" {
+  default = "1"
+}
+
+data "digitalocean_image" "example1" {
+  name = "example-ubuntu-16-04-x64-${var.version}"
 }
 
 resource "digitalocean_droplet" "web" {
   count  = 2
-  image  = "${var.image}"
+  image  = "${data.digitalocean_image.example1.image}"
   name   = "web-${count.index}"
   region = "lon1"
   size   = "512mb"
@@ -38,6 +41,7 @@ resource "digitalocean_loadbalancer" "public" {
   healthcheck {
     port     = 80
     protocol = "http"
+    path     = "/"
   }
 }
 
