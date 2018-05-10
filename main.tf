@@ -39,9 +39,10 @@ resource "digitalocean_loadbalancer" "public" {
   }
 
   healthcheck {
-    port     = 80
-    protocol = "http"
-    path     = "/"
+    port                   = 80
+    protocol               = "http"
+    path                   = "/"
+    check_interval_seconds = "5"
   }
 }
 

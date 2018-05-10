@@ -1,5 +1,6 @@
 #!/bin/bash
 
+# Simple script to check the health of a created droplet
 fail_count=1
 
 while true
@@ -8,6 +9,7 @@ do
 
   if [ $response -eq 200 ] ; then
     echo "$(date -u) Server available"
+    sleep 30 # wait for loadbalancer to register
     exit 0
   else
     if [ $fail_count -eq 11 ]; then
