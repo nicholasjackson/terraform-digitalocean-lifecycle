@@ -1,7 +1,7 @@
 {
   "variables": {
     "image": "ubuntu-16-04-x64",
-    "version":""
+    "version":"1"
   },
   "builders": [
   {
@@ -11,7 +11,8 @@
     "size": "512mb",
     "ssh_username": "root",
     "snapshot_name":"example-{{user `image`}}-{{user `version`}}"
-  }],
+  }
+  ],
   "provisioners": [
     {
       "type": "ansible",

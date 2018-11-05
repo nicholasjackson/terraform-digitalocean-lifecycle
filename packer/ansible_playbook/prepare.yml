@@ -6,7 +6,7 @@
 
   pre_tasks:
   - name: Install python2 for Ansible
-    raw: bash -c "test -e /usr/bin/python || (apt -qqy update && apt install -qqy python-minimal)"
+    raw: bash -c "test -e /usr/bin/python || (sudo apt -qqy update && sudo apt install -qqy python-minimal)"
     register: output
     changed_when: output.stdout != ""
   - name: Gathering Facts
@@ -15,7 +15,7 @@
   tasks:
   - name: update apt
     apt:
-      update_cache: yes
+      update_cache: true
   - name: Update all packages to the latest version
     apt:
       upgrade: dist
@@ -31,12 +31,12 @@
   - name: Install the package "software-properties-common"
     apt:
       name: software-properties-common
- 
+
   # Install NGINX
   - name: Install NGINX
     apt:
       name: nginx
-  - name: 
+  - name:
     copy:
       src: index{{ version }}.html
       dest: /var/www/html/index.html
