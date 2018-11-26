@@ -2,7 +2,7 @@
 
 while true
 do
-  version=$(curl --silent $1 --stderr - | sed -n 's:.*<title>\(.*\)</title>.*:\1:p')
+  version=$(curl --max-time 1 --silent $1 --stderr - | sed -n 's:.*<title>\(.*\)</title>.*:\1:p')
 
   if [ "$version" == "" ]; then
     echo "$(date -u) Service Unavailable"
@@ -10,5 +10,5 @@ do
     echo "$(date -u) $version"
   fi
  
-  sleep 1
+  sleep 0.5
 done

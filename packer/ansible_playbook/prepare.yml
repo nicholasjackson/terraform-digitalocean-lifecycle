@@ -15,7 +15,7 @@
   tasks:
   - name: update apt
     apt:
-      update_cache: true
+      update_cache: yes
   - name: Update all packages to the latest version
     apt:
       upgrade: dist

@@ -9,7 +9,11 @@ do
 
   if [ $response -eq 200 ] ; then
     echo "$(date -u) Server available"
-    sleep 30 # wait for loadbalancer to register
+    # wait for loadbalancer to register
+
+    echo "$(date -u) Waiting for Droplet to register with LB"
+    sleep 60
+
     exit 0
   else
     if [ $fail_count -eq 11 ]; then
@@ -22,3 +26,4 @@ do
     fi
   fi
 done
+

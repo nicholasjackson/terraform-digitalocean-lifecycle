@@ -9,12 +9,13 @@ data "digitalocean_image" "example1" {
 }
 
 resource "digitalocean_droplet" "web" {
-  count  = 2
+  count = 2
+
   image  = "${data.digitalocean_image.example1.image}"
   name   = "web-${count.index}"
   region = "lon1"
   size   = "512mb"
-  tags   = ["example"]
+  tags   = ["zero-downtime"]
 
   lifecycle {
     create_before_destroy = true
@@ -28,7 +29,7 @@ resource "digitalocean_droplet" "web" {
 resource "digitalocean_loadbalancer" "public" {
   name        = "loadbalancer-1"
   region      = "lon1"
-  droplet_tag = "example"
+  droplet_tag = "zero-downtime"
 
   forwarding_rule {
     entry_port     = 80
