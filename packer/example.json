@@ -11,7 +11,7 @@
     "type": "digitalocean",
     "image": "{{user `image`}}",
     "region": "{{user `dropletregion`}}",
-    "size": "{{user `"dropletsize`}}",
+    "size": "{{user `dropletsize`}}",
     "ssh_username": "root",
     "snapshot_name":"example-{{user `image`}}-{{user `siteversion`}}"
   }

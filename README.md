@@ -143,4 +143,4 @@ Implementing `lifecycle hooks` and utilizing `provisioners` ensure that your new
 
 To try out these examples, please see the example code which can be found at: [https://github.com/nicholasjackson/terraform-digitalocean-lifecycle](https://github.com/nicholasjackson/terraform-digitalocean-lifecycle)
 
-A full walkthrough of this example can be seen in the following video: <iframe width="560" height="315" src="https://www.youtube.com/embed/bQxS4FT9qtc" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+A full walkthrough of this example can be seen in the following video: [![Youtube walkthrough](http://img.youtube.com/vi/bQxS4FT9qtc.jpg)](http://www.youtube.com/watch?v=bQxS4FT9qtc "Zero downtime updates with Terraform")
