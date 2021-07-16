@@ -1,11 +1,24 @@
-provider "digitalocean" {}
+terraform {
+  required_providers {
+    digitalocean = {
+      source  = "digitalocean/digitalocean"
+      version = "~> 2.0"
+    }
+  }
+}
 
-variable "version" {
+locals {
+  ubuntuversion = "18-04"
+  dropletsize   = "s-1vcpu-1gb"
+  dropletregion = "lon1"
+}
+
+variable "siteversion" {
   default = "1"
 }
 
 data "digitalocean_image" "example1" {
-  name = "example-ubuntu-16-04-x64-${var.version}"
+  name = "example-ubuntu-${local.ubuntuversion}-x64-${var.siteversion}"
 }
 
 resource "digitalocean_droplet" "web" {
@@ -13,8 +26,8 @@ resource "digitalocean_droplet" "web" {
 
   image  = "${data.digitalocean_image.example1.image}"
   name   = "web-${count.index}"
-  region = "lon1"
-  size   = "512mb"
+  region = local.dropletregion 
+  size   = local.dropletsize 
   tags   = ["zero-downtime"]
 
   lifecycle {

@@ -15,7 +15,7 @@ resource "digitalocean_droplet" "web" {
   image  = "${var.image}"
   name   = "web-${count.index}"
   region = "lon1"
-  size   = "512mb"
+  size   = "s-1vcpu-1gb"
   tags   = ["example"]
 }
 ```
@@ -99,9 +99,9 @@ The example in this repository requires you create the two images containing NGI
 ```bash
 $ cd packer
 # Build version 1
-$ packer build -var 'version=1' example.json
+$ packer build -var 'siteversion=1' example.json
 # Build version 2
-$ packer build -var 'version=2' example.json
+$ packer build -var 'siteversion=2' example.json
 ```
 
 ### Init terraform
@@ -117,22 +117,22 @@ $ terraform init
 The next step is to create the initial version running terraform `plan` and `apply`, we are specifiying the version as a variable to the plan command, this will select the correct image which you built in the previous step:
 
 ```bash
-$ terraform plan -var 'version=1' -out out.plan
+$ terraform plan -var 'siteversion=1' -out out.plan
 $ terraform apply out.plan
 ```
 
 Now the initial version has been created containing two droplets with our version 1 image and a load balancer you can run the simple test script to ping the service.
 
 ```bash
-$ ./test $(terraform ouput lb_ip)
+$ ./test $(terraform output lb_ip)
 ```
 
 ### Create version 2 of the configuration
 
-In a new terminal window we can now update the existing infrastructure by re-running the plan and specifying `version=2` as a variable, this will force terraform to re-create the two droplets as the image has now changes.
+In a new terminal window we can now update the existing infrastructure by re-running the plan and specifying `siteversion=2` as a variable, this will force terraform to re-create the two droplets as the image has now changes.
 
 ```bash
-$ terraform plan -var 'version=1' -out out.plan
+$ terraform plan -var 'siteversion=2' -out out.plan
 $ terraform apply out.plan
 ```
 
