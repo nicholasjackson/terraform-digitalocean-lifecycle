@@ -36,7 +36,7 @@
   - name: Install NGINX
     apt:
       name: nginx
-  - name:
+  - name: Deploy site
     copy:
-      src: index{{ version }}.html
+      src: index{{ siteversion }}.html
       dest: /var/www/html/index.html
